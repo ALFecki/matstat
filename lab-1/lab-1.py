@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import geom, binom, poisson, uniform, norm, expon
 
 # Загрузка данных из файла
-data_set_1 = pd.read_csv('./lab-1/set_1.csv', header=None)
+data_set_1 = pd.read_csv('set_1.csv', header=None)
 data_set_1 = data_set_1.values.flatten()
 
 # Построение гистограммы
@@ -62,3 +62,22 @@ plt.xlabel('Значение')
 plt.ylabel('Частота')
 plt.title('Гистограмма для экспоненциального распределения')
 plt.show()
+
+
+def mean(values):
+    if not values:
+        return None
+    return sum(values) / len(values)
+
+def variance(data):
+    n = len(data)
+    if n < 2:
+        raise ValueError("The data should contain at least two elements.")
+    
+    squared_diffs = [(x - sum(data) / n) ** 2 for x in data]
+    return sum(squared_diffs) / (n - 1)
+    
+mean_set_1 = mean(data_set_1.tolist())
+variance_set_1 = variance(data_set_1.tolist())
+
+print(mean_set_1, variance_set_1)
